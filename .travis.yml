@@ -14,7 +14,7 @@ deploy:
   name: diskdict-0.1
   tag_name: 0.1
   on:
-    repo: deep-compute/diskarray
+    repo: deep-compute/diskdict
 - provider: pypi
   distributions: "sdist bdist_wheel"
   server: https://upload.pypi.org/legacy/
@@ -23,4 +23,4 @@ deploy:
     secure: "XScKeAhmF7gGThEjJCtur1RHlGUZ2n3FXukp7619YHmLoUzvszo8Wg+ZSJrdl3soEuSvVQdn2G3ngxAZdKmNhWVYrUKRdKL5iY4WyYHVujkOq+diVqCGHWbSmZJupyscgt1L/H8l+IohC1dnng/ThQuFp7Jbay68lM8LzS20f16JgSL6Xq+jRqqtBU3jALoqf9scnwuXG+Yj51YTQ9DmS37ctlLyzg3GEbICQB1dNaSZ3HtM1LB0/69++rhukzicm1Z9FcNEbdL9U7ohAgrI1+0mj/4xtURIrOwvlKjhjXUxf5S2RMe49xFq4KDRkXL8uwUEvRnskwXH6u0+mkAQRpMYFMygxcmiVhuhhelJD43RuO56o84IWQLAwje/RUeH1huePUNBV63tAXQC1uQ4yoaZs/DehtjDjgIkk/j4xdTnlwaN68icGrnWxZ5QCwZkz16OQ84HolTLGG9X1Fuqs7iYGI9GmBYfSG6FVp6H6E1Cakvc492gAVqIJKln6Y5u8a1SPpHp2jhhqzsMQo/fwqDTc8m59ENX1zxcIgtJjaWrgkJ4U+W4GBosKpevTJCLKzpirsfJ2Al/7E7rTEOpXpw3NNeeyben708/RiPbWVvhE6yZ7Z6XHYzIO+fF9gr0pRiqdL3uL3ASCUlNEBvw5j7adH57foeTf8mZkQqLyrU="
   on:
     tags: true
-branch: master
+    branch: master

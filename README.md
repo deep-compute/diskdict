@@ -2,6 +2,7 @@
 
 ## Description
 `DiskDict` is a file based module which stores data as key, value pairs like a python dictionary.
+
 ## Installation
 
 > Prerequisites: Python

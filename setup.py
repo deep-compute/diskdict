@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.2'
 setup(
     name="diskdict",
     version=version,
@@ -14,6 +14,7 @@ setup(
     install_requires=[
         'deeputil==0.2.5',
         'basescript==0.2.1'
+        'sqlitedict==1.5.0',
     ],
     package_dir={'diskdict': 'diskdict'},
     packages=find_packages('.'),

@@ -1,20 +1,18 @@
 import os
-import shelve
 
 from deeputil import Dummy
+from sqlitedict import SqliteDict
 
 DUMMY_LOG = Dummy()
 
-# export DISKDICT_DATAFILE_PATH=='/home/usr/diskdict_fiile_path'
+# export DISKDICT_DATAFILE_PATH=='/home/usr/diskdict_file_path'
 DATA_FILE = os.environ.get('DISKDICT_DATAFILE_PATH', '')
 
 
 class DiskDict(object):
     # FIXME: using eval - dangerous
-    # probably should use sqlite3dict or something like it
-    # even RocksDB
 
-    def __init__(self, fpath, log=DUMMY_LOG):
+    def __init__(self, fpath, autocommit=True, log=DUMMY_LOG):
         '''
         >>> dd = DiskDict(DATA_FILE)
         >>> dd['deepcompute'] = 1
@@ -22,7 +20,7 @@ class DiskDict(object):
 
         self._fpath = fpath
         self.log = log
-        self._f = shelve.open(fpath)
+        self._f = SqliteDict(fpath, autocommit=autocommit)
 
     def get(self, k, default=None):
         '''
@@ -49,7 +47,7 @@ class DiskDict(object):
         ('deepcompute', 1)
         '''
 
-        for k, v in self._f.items():
+        for k, v in self._f.iteritems():
             yield eval(k), v
 
     def values(self):
@@ -59,7 +57,7 @@ class DiskDict(object):
         1
         '''
 
-        for v in self._f.values():
+        for v in self._f.itervalues():
             yield v
 
     def keys(self):
@@ -69,7 +67,7 @@ class DiskDict(object):
         deepcompute
         '''
 
-        for k in self._f.keys():
+        for k in self._f.iterkeys():
             yield eval(k)
 
     def flush(self):
@@ -78,8 +76,7 @@ class DiskDict(object):
         >>> dd.flush()
         '''
 
-        self._f.close()
-        self._f = shelve.open(self._fpath)
+        self._f.commit()
 
     def close(self):
         '''

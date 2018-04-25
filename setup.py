@@ -13,7 +13,7 @@ setup(
     license='MIT License',
     install_requires=[
         'deeputil==0.2.5',
-        'basescript==0.2.1'
+        'basescript==0.2.5',
         'sqlitedict==1.5.0',
     ],
     package_dir={'diskdict': 'diskdict'},

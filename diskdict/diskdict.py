@@ -7,7 +7,7 @@ import plyvel
 DUMMY_LOG = Dummy()
 
 # export DISKDICT_DATADIR_PATH=='/home/usr/diskdict_dir_path'
-DATA_FILE = os.environ.get('DISKDICT_DATADIR_PATH', '')
+DATA_FILE = os.environ.get('DISKDICT_DATADIR_PATH', '/tmp')
 
 
 class DiskDict(object):

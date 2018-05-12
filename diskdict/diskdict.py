@@ -1,26 +1,33 @@
 import os
+import pickle
 
 from deeputil import Dummy
-from sqlitedict import SqliteDict
+import plyvel
 
 DUMMY_LOG = Dummy()
 
-# export DISKDICT_DATAFILE_PATH=='/home/usr/diskdict_file_path'
-DATA_FILE = os.environ.get('DISKDICT_DATAFILE_PATH', '')
+# export DISKDICT_DATADIR_PATH=='/home/usr/diskdict_dir_path'
+DATA_FILE = os.environ.get('DISKDICT_DATADIR_PATH', '/tmp')
 
 
 class DiskDict(object):
     # FIXME: using eval - dangerous
 
-    def __init__(self, fpath, autocommit=True, log=DUMMY_LOG):
+    def __init__(self, path, log=DUMMY_LOG):
         '''
         >>> dd = DiskDict(DATA_FILE)
         >>> dd['deepcompute'] = 1
         '''
 
-        self._fpath = fpath
+        self._path = path
         self.log = log
-        self._f = SqliteDict(fpath, autocommit=autocommit)
+        self._f = plyvel.DB(path, create_if_missing=True)
+
+    def _enckey(self, k):
+        return repr(k).encode('utf8')
+
+    def _deckey(self, k):
+        return eval(k.decode('utf8'))
 
     def get(self, k, default=None):
         '''
@@ -29,16 +36,22 @@ class DiskDict(object):
         1
         '''
 
-        k = repr(k)
-        return self._f.get(k)
+        k = self._enckey(k)
+        v = self._f.get(k, None)
+        if v is None: return default
+        return pickle.loads(v)
 
     def __getitem__(self, k):
-        k = repr(k)
-        return self._f[k]
+        return self.get(k)
 
     def __setitem__(self, k, v):
-        k = repr(k)
-        self._f[k] = v
+        k = self._enckey(k)
+        v = pickle.dumps(v)
+        self._f.put(k, v)
+
+    def __delitem__(self, k):
+        k = self._enckey(k)
+        self._f.delete(k)
 
     def items(self):
         '''
@@ -47,8 +60,8 @@ class DiskDict(object):
         ('deepcompute', 1)
         '''
 
-        for k, v in self._f.iteritems():
-            yield eval(k), v
+        for k, v in self._f:
+            yield self._deckey(k), pickle.loads(v)
 
     def values(self):
         '''
@@ -57,7 +70,7 @@ class DiskDict(object):
         1
         '''
 
-        for v in self._f.itervalues():
+        for _, v in self.items():
             yield v
 
     def keys(self):
@@ -67,8 +80,8 @@ class DiskDict(object):
         deepcompute
         '''
 
-        for k in self._f.iterkeys():
-            yield eval(k)
+        for k, _ in self.items():
+            yield k
 
     def flush(self):
         '''
@@ -76,7 +89,7 @@ class DiskDict(object):
         >>> dd.flush()
         '''
 
-        self._f.commit()
+        pass
 
     def close(self):
         '''

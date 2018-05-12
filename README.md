@@ -16,22 +16,22 @@ $ sudo pip install diskdict
 ```python
 >>> from diskdict import DiskDict
 
-# Creating the diskdict file
->>> dd = DiskDict('/tmp/disk.dict')
+# Initiate the diskdict with the path
+>>> dd = DiskDict('/tmp/diskdict')
 
-# Storing the data into diskdict file
+# Storing the data into diskdict
 >>> dd['deepcompute'] = 1
 >>> dd['deeporg'] = 2
 >>> dd[1] = 5
 
-# Get the values regarding keys from diskdict file
+# Get the values regarding keys from diskdict
 >>> print(dd.get('deepcompute'))
 1
 
 >>> print(dd['deepcompute'])
 1
 
-# Get key, value pairs in tuple format from diskdict file
+# Get key, value pairs in tuple format from diskdict
 >>> next(dd.items())
 ('deeporg', 2)
 
@@ -42,7 +42,7 @@ $ sudo pip install diskdict
 ('deepcompute', 1)
 (1, 5)
 
-# Get the keys from diskdict file
+# Get the keys from diskdict
 >>> next(dd.keys())
 deeporg
 
@@ -53,7 +53,7 @@ deeporg
 deepcompute
 1
 
-# Get the values from diskdict file
+# Get the values from diskdict
 >>> next(dd.values())
 2
 
@@ -86,4 +86,3 @@ DiskDict Console
 ```
 $ python setup.py test
 ```
-

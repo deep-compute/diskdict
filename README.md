@@ -68,10 +68,12 @@ deepcompute
 >>> dd.close()
 
 ```
+
 ## Interactive console
 ```
 $ diskdict interact <input_file>
 ```
+
 #### QuickExample
 ```
 $ diskdict interact /tmp/disk.dict
@@ -79,6 +81,19 @@ DiskDict Console
 >>> dd['dc']=1
 >>> dd.get('dc')
 1
+```
+
+## DiskDict submit
+
+When we need to get values for bunch of keys then the submit can be used
+
+```python
+from diskdict import DiskDict, submit
+
+d = DiskDict('/tmp/diskdict')
+
+keys = ['india', 'ap', 'bg', 'the', 'of']
+result = submit(d, keys, default=None) # If key is not present then default is used
 ```
 
 ## Running Tests

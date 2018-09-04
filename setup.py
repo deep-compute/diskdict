@@ -13,7 +13,7 @@ setup(
     license='MIT License',
     install_requires=[
         'deeputil==0.2.5',
-        'basescript==0.2.5',
+        'basescript==0.2.6',
         'plyvel==1.0.4',
     ],
     package_dir={'diskdict': 'diskdict'},

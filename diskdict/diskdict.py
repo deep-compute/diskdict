@@ -13,15 +13,25 @@ DATA_FILE = os.environ.get('DISKDICT_DATADIR_PATH', '/tmp')
 class DiskDict(object):
     # FIXME: using eval - dangerous
 
-    def __init__(self, path, log=DUMMY_LOG):
+    def __init__(self, path, create_if_missing=True, error_if_exists=False,
+                paranoid_checks=None, write_buffer_size=None,
+                max_open_files=None, lru_cache_size=None, block_size=None,
+                block_restart_interval=None, max_file_size=None, compression='snappy',
+                bloom_filter_bits=0, comparator=None, comparator_name=None, log=DUMMY_LOG):
         '''
+        Ref: https://plyvel.readthedocs.io/en/latest/api.html#DB.__init__
         >>> dd = DiskDict(DATA_FILE)
         >>> dd['deepcompute'] = 1
         '''
 
         self._path = path
         self.log = log
-        self._f = plyvel.DB(path, create_if_missing=True)
+        self._f = plyvel.DB(path, create_if_missing=create_if_missing, error_if_exists=error_if_exists,
+                            paranoid_checks=paranoid_checks, write_buffer_size=write_buffer_size,
+                            max_open_files=max_open_files, lru_cache_size=lru_cache_size, block_size=block_size,
+                            block_restart_interval=block_restart_interval, max_file_size=max_file_size,
+                            compression=compression, bloom_filter_bits=bloom_filter_bits,
+                            comparator=comparator, comparator_name=comparator_name)
 
     def _enckey(self, k):
         return repr(k).encode('utf8')

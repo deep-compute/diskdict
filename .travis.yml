@@ -11,8 +11,8 @@ deploy:
 - provider: releases
   api_key:
     secure: DrwGaBEFBMft6Cgd2k7koWQxVx28T9RpilvobItKgKBy4w/A7GDK5BO3ft0KmISaPcPghkx6wEUt+VynSYW5qTao7H/wCZ3jn5xN/5DRpT/NJt+jzXSXa1WlsBhs7zEYcXxI69ZCxRQ+Y5k0zgCooEyit9rUKtXoj6MakCy5o+rZcYZqEayazuTsRM8SZzqkk0A/DTHt0QadFsjxmiczcPxefYx4yNlsKbhfNFINjzpWrJg5P8KydO8gpUT03oRY899UYZ7sduKeTHx+6yUcwjoCW2h7P5PqAK6Gb11NU0nKg19AMBXhjbjWIMsOpsiieQavkMSVJ4ZyfMOuGc8i8oCb/0uiSmJbMG9pDVMXrIc07cCgx1RvGXUJyUEKsLaRBvWLZ64zWu4ZLOfaj/CM7s3ZTslnNojJQtbRrqhstYUnikQnOU7tI6Yl5ig2KV+u1TZWT4MLfrAo1ErxAffVEwIkm1aL3HFNW0+rAv2eUwF5dPaJGI38fg5S4IWe8vjYNWW6kLfcP5z+vgk7lTdt7jS645h826MZ9LQascBfGBNMqX6j73LeOaGXFIE+DmhPUqDI+9yEKtmYgBGxMHSRDGcR2ZTr1GRGIASTboQEvzLeiZSc/2xKHOeJnXnZz/U2SnbT0TpyIPPJ+4CgcloaMwqPjBi8E4iSCivm5PWw9Do=
-  name: diskdict-0.2.2
-  tag_name: 0.2.2
+  name: diskdict-0.2.3
+  tag_name: 0.2.3
   on:
     repo: deep-compute/diskdict
 - provider: pypi

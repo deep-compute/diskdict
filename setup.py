@@ -12,8 +12,8 @@ setup(
     download_url="https://github.com/deep-compute/diskdict/tarball/%s" % version,
     license='MIT License',
     install_requires=[
-        'deeputil==0.2.5',
-        'basescript==0.2.6',
+        'deeputil==0.2.7',
+        'basescript==0.2.9',
         'plyvel==1.0.4',
     ],
     package_dir={'diskdict': 'diskdict'},

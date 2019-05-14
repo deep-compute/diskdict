@@ -5,10 +5,10 @@
 
 ## Installation
 
-> Prerequisites: Python3
+> Prerequisites: Python
 
 ```bash
-$ sudo pip3 install diskdict
+$ sudo pip install diskdict
 ```
 
 ## Quick Example

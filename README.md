@@ -1,13 +1,13 @@
 # DiskDict
 
 ## Description
-`DiskDict` is a file based module which stores data as key, value pairs like a python dictionary.
+`DiskDict` is a file based module which stores data as key, value pairs like a python dictionary. `DiskDict` stores the data on the disk unlike python dictionary which stores data in the RAM.
 
 ## Installation
 
 > Prerequisites: Python
 
-```
+```bash
 $ sudo pip install diskdict
 ```
 
@@ -66,14 +66,15 @@ deepcompute
 
 # closing the file
 >>> dd.close()
+```
 
-```
 ## Interactive console
-```
+```bash
 $ diskdict interact <input_file>
 ```
+
 #### QuickExample
-```
+```bash
 $ diskdict interact /tmp/disk.dict
 DiskDict Console
 >>> dd['dc']=1
@@ -81,8 +82,36 @@ DiskDict Console
 1
 ```
 
+## Static String to Int map
+`diskdict` uses cmph and mmap to build static string to integer map. We have to provide the byte strings initially.
+`diskdict` builds respective index for each key.
+
+### Example
+
+```python
+from diskdict import StaticStringIndexDict
+
+l = [b'india', b'usa', b'japan', b'china']
+s = StaticStringIndexDict(path='/data/map', keys=l)
+
+print(s[b'japan'])
+
+s.close()
+```
+
+Above example builds the map in the location of `/data/map`. We don't have to provide the byte strings from second time onwards.
+
+```python
+from diskdict import StaticStringIndexDict
+
+s = StaticStringIndexDict(path='/data/map')
+print(s[b'japan'])
+
+s.close()
+```
+
 ## Running Tests
 
-```
+```bash
 $ python setup.py test
 ```

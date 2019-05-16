@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.2.4'
+version = '0.2.5'
 setup(
     name="diskdict",
     version=version,
@@ -15,6 +15,9 @@ setup(
         'deeputil==0.2.7',
         'basescript==0.2.9',
         'plyvel==1.0.4',
+        'cmph-cffi==0.3.0',
+        'diskarray==0.1.9',
+        'numpy==1.14.3',
     ],
     package_dir={'diskdict': 'diskdict'},
     packages=find_packages('.'),

@@ -8,14 +8,12 @@ from deeputil import Dummy
 
 DUMMY_LOG = Dummy()
 
+
 class VarArray(DiskVarArray):
-    def __init__(self, dpath, mode='r+',
-            growby=DiskVarArray.GROWBY,
-            log=DUMMY_LOG):
-        super(VarArray, self).__init__(dpath,
-                dtype=np.uint8,
-                mode=mode, growby=growby,
-                log=log)
+    def __init__(self, dpath, mode="r+", growby=DiskVarArray.GROWBY, log=DUMMY_LOG):
+        super(VarArray, self).__init__(
+            dpath, dtype=np.uint8, mode=mode, growby=growby, log=log
+        )
 
     def __getitem__(self, idx):
         data = super(VarArray, self).__getitem__(idx)
@@ -43,19 +41,20 @@ class VarArray(DiskVarArray):
         v = [self._convert(x) for x in v]
         return super(VarArray, self).extend(v)
 
+
 class StaticStringIndexDict:
     def __init__(self, path, keys=None, log=DUMMY_LOG):
         self._path = path
         self.log = log
         self._data = None
         self._mph = None
-        self._mph_path = os.path.join(path, 'mph')
+        self._mph_path = os.path.join(path, "mph")
 
         if keys:
             self._data, self._mph = self._storedata(path, keys)
         else:
             self._data = VarArray(path)
-            self._mph = cmph.load_hash(open(self._mph_path, 'rb'))
+            self._mph = cmph.load_hash(open(self._mph_path, "rb"))
 
     def _storedata(self, path, keys):
         if os.path.exists(path):
@@ -74,7 +73,7 @@ class StaticStringIndexDict:
 
         _data = []
 
-        for i in range(_max+1):
+        for i in range(_max + 1):
             k = data.get(i, None)
             v = None if k is None else (keyindices[k], k)
             _data.append(v)
@@ -86,7 +85,7 @@ class StaticStringIndexDict:
         return d, mph
 
     def get(self, k, default=None):
-        i = self._mph(k) # FIXME: what if i is out of range?
+        i = self._mph(k)  # FIXME: what if i is out of range?
         n, _k = self._data[i]
         if _k != k:
             return None
@@ -102,7 +101,8 @@ class StaticStringIndexDict:
     def items(self):
         for i in range(len(self._data)):
             v = self._data[i]
-            if v is None: continue
+            if v is None:
+                continue
 
             n, k = v
             yield k, n

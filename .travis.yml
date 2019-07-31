@@ -1,5 +1,4 @@
 before_install:
-- pip3 install black
 - export DATA_FILE='/tmp/diskdict'
 deploy:
 - provider: releases
@@ -24,5 +23,5 @@ language: python
 python:
 - '3.5'
 script:
-- black --check .
+- docker run -v $(pwd):/app deepcompute/black:python-black-latest --check .
 - python setup.py test
